@@ -1,5 +1,7 @@
 plugins {
     id("java")
+    id("com.github.johnrengelman.shadow") version "7.1.2"
+    id("net.kyori.blossom") version "1.3.0"
 }
 
 group = "pl.szczurowsky.velocityloadbalancer"
@@ -19,4 +21,21 @@ repositories {
 dependencies {
     compileOnly("com.velocitypowered:velocity-api:3.1.1")
     annotationProcessor("com.velocitypowered:velocity-api:3.1.1")
+}
+
+blossom {
+    replaceTokenIn("src/main/java/net/mineworld/sectors/proxy/VelocityBootstrapPlugin.java")
+    replaceToken("@version@", project.version)
+}
+
+tasks.withType <com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar> {
+    archiveFileName.set("VelocityLoadBalancer v${project.version}.jar")
+
+    exclude("org/intellij/lang/annotations/**")
+    exclude("org/jetbrains/annotations/**")
+    exclude("META-INF/**")
+    exclude("javax/**")
+
+
+    mergeServiceFiles()
 }
