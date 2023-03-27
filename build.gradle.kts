@@ -1,7 +1,7 @@
 plugins {
     id("java")
     id("com.github.johnrengelman.shadow") version "7.1.2"
-    id("net.kyori.blossom") version "1.3.0"
+    id("net.kyori.blossom") version "1.3.1"
 }
 
 group = "pl.szczurowsky.velocityloadbalancer"
